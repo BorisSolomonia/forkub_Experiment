@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: pod
+metadata:
+  name: forkub
+  labels:
+    name: forkub
+    app: forkub
+#spec:
+#  replicas: 3
+#  selector:
+#    matchLabels:
+#      app: forkub
+#  template:
+#    metadata:
+#      labels:
+#        app: forkub
+spec:
+  containers:
+    - name: forkub
+      image: borissolomonia/forkub-1:tagname
+#          imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: forkub-service
+  labels:
+    name: forkub-service
+    app: forkub
+spec:
+  type: LoadBalancer
+  selector:
+    name: forkub-pod
+    app: forkub
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
