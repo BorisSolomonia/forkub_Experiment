@@ -15,6 +15,7 @@ spec:
       containers:
         - name: forkub-container
           image: borissolomonia/forkub-1:tagname
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
 ---
